@@ -44,7 +44,7 @@ stop:
 ##################### Extra
 
 import-demo-course:
-	$(DOCKER_COMPOSE_RUN) cms /bin/bash -c "git clone https://github.com/edx/edx-demo-course ../edx-demo-course && git -C ../edx-demo-course checkout open-release/ginkgo.master && python ./manage.py cms import ../data ../edx-demo-course"
+	$(DOCKER_COMPOSE_RUN) cms /bin/bash -c "git clone https://github.com/edx/edx-demo-course ../edx-demo-course && git -C ../edx-demo-course checkout open-release/hawthorn.beta1 && python ./manage.py cms import ../data ../edx-demo-course"
 
 create-staff-user:
 	$(DOCKER_COMPOSE_RUN) lms /bin/bash -c "./manage.py lms manage_user --superuser --staff ${USERNAME} ${EMAIL} && ./manage.py lms changepassword ${USERNAME}"
@@ -69,11 +69,11 @@ build:
 	docker-compose build
 
 tag:
-	docker tag openedx regis/openedx:ginkgo
+	docker tag openedx regis/openedx:hawthorn
 	docker tag openedx regis/openedx:latest
 
 push:
-	docker push regis/openedx:ginkgo
+	docker push regis/openedx:hawthorn
 	docker push regis/openedx:latest
 
 dockerhub: build tag push
